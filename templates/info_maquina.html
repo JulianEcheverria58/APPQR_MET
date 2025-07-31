@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Información de Máquina {{ maquina.id }}</title>
+    <style>
+        .maquina-info {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .info-item {
+            margin-bottom: 10px;
+        }
+        .label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="maquina-info">
+        <h2>Información de Máquina</h2>
+        
+        <div class="info-item">
+            <span class="label">ID:</span>
+            <span>{{ maquina.id }}</span>
+        </div>
+        
+        <div class="info-item">
+            <span class="label">Nombre:</span>
+            <span>{{ maquina.nombre }}</span>
+        </div>
+        
+        <div class="info-item">
+            <span class="label">Modelo:</span>
+            <span>{{ maquina.modelo }}</span>
+        </div>
+        
+        <div class="info-item">
+            <span class="label">Último Mantenimiento:</span>
+            <span>{{ maquina.ultimo_mantenimiento }}</span>
+        </div>
+        
+        <div class="info-item">
+            <span class="label">Horas de Uso:</span>
+            <span>{{ maquina.horas_uso }}</span>
+        </div>
+        
+        <div class="info-item">
+            <span class="label">Último Reporte:</span>
+            <span>{{ maquina.ultimo_reporte }}</span>
+        </div>
+        
+        <div class="info-item">
+            <span class="label">Último Operador:</span>
+            <span>{{ maquina.ultimo_operador }}</span>
+        </div>
+    </div>
+</body>
+</html>

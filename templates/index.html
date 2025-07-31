@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  ...
+  <!-- Añadir estas meta tags -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#3498db">
+  <link rel="manifest" href="/static/manifest.json">
+  <!-- iOS support -->
+  <link rel="apple-touch-icon" href="/static/icons/icon-192x192.png">
+  <meta name="apple-mobile-web-app-status-bar" content="#3498db">
+</head>
+<body>
+  ...
+  <script>
+    // Registrar Service Worker
+    if('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/static/js/sw.js')
+          .then(reg => console.log('SW registrado'))
+          .catch(err => console.log('Error SW:', err));
+      });
+    }
+    
+    // Mostrar botón de instalación
+    let deferredPrompt;
+    const installBtn = document.createElement('button');
+    installBtn.textContent = 'Instalar App';
+    installBtn.style.cssText = 'position: fixed; bottom: 20px; right: 20px; z-index: 100;';
+    installBtn.addEventListener('click', installApp);
+    document.body.appendChild(installBtn);
+    installBtn.hidden = true;
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.hidden = false;
+    });
+
+    function installApp() {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(choice => {
+        if (choice.outcome === 'accepted') {
+          console.log('Usuario instaló la app');
+        }
+        deferredPrompt = null;
+        installBtn.hidden = true;
+      });
+    }
+  </script>
+</body>
+</html>
